@@ -1,23 +1,29 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
+  const [testState, setTestState] = useState(null);
+  const [fetchedData, setFetchedData] = useState(null);
+
+  function fetchDataFromBackend() {
+    fetch(`http://localhost:8080/api/get-random-dish`)
+      .then(response => response.text())
+      .then(data => {
+        console.log(data);
+        setFetchedData(data);
+        testState === 'Yes' ? setTestState('No') : setTestState('Yes')
+      })
+      .catch(error => console.error("Error fetching data: ", error));
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Hello World!</h1>
+      <button onClick={() => fetchDataFromBackend()}>Fetch data button</button>
+      <p/>
+      <div>{fetchedData}</div>
+      <p/>
+      <div>{testState}</div>
     </div>
   );
 }
