@@ -1,38 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+:root {
+  --color-white: #FFEAEC;
+  --color-light: #D7AF70;
+  --color-mid: #D2A660;
+  --color-dark: #011627;
+  --color-brown: #493B32;
+}
+
+body {
+  color: var(--color-light);
+  background-color: var(--color-brown);
+  font-family: 'Roboto Mono', monospace;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
   min-height: 100vh;
+  background-image: url('./resources/background-image.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 2rem;
 }
 
-.App-link {
-  color: #61dafb;
+@media (max-width: 700px) {
+  .recipe-summary {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .recipe-details-container {
+    flex-direction: column;
+  }
+
+  .recipe-image {
+    width: 100%;
+    max-width: 300px;
+  }
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+/* Color
+Bright: #D7AF70, #D2A660, #CE9D50
+Dark: #02233D, #011627
+*/

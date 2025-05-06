@@ -1,29 +1,25 @@
 import React, { useEffect, useState } from 'react';
+import RecipeCard from './components/RecipeCard';
+import Options from './components/Options';
+import Footer from './components/Footer';
+import useRandomRecipe from './hooks/useRandomRecipe'
 import './App.css';
 
 function App() {
-  const [testState, setTestState] = useState(null);
-  const [fetchedData, setFetchedData] = useState(null);
-
-  function fetchDataFromBackend() {
-    fetch(`http://localhost:8080/api/get-random-dish`)
-      .then(response => response.text())
-      .then(data => {
-        console.log(data);
-        setFetchedData(data);
-        testState === 'Yes' ? setTestState('No') : setTestState('Yes')
-      })
-      .catch(error => console.error("Error fetching data: ", error));
-  }
+  const { recipe, loading, error, fetchRecipe } = useRandomRecipe();
 
   return (
     <div className="App">
-      <h1>Hello World!</h1>
-      <button onClick={() => fetchDataFromBackend()}>Fetch data button</button>
-      <p/>
-      <div>{fetchedData}</div>
-      <p/>
-      <div>{testState}</div>
+      {error && <p className='error-message'>{error}</p>}
+
+      {recipe ? (
+        <RecipeCard recipe={recipe} onRandomize={fetchRecipe} />
+      ) : (
+        !loading && <p>No recipe loaded yet.</p>
+      )}
+
+      <Options />
+      <Footer />
     </div>
   );
 }
