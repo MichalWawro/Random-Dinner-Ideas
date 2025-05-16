@@ -1,31 +1,38 @@
 package com.example.server.controller;
 
 import com.example.server.model.Recipe;
-import com.example.server.repository.RecipeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.server.service.RecipeService;
 
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/recipes")
+@CrossOrigin(origins = "http://localhost:3000")
 public class RecipeController {
 
     @Autowired
-    private RecipeRepository recipeRepository;
-
-    @GetMapping("/get-random-dish")
-    @CrossOrigin(origins = {"http://localhost:3000"})
-    public String testFetch() {
-        List<Recipe> recipes = recipeRepository.findAll();
-        if (!recipes.isEmpty()) {
-            Recipe firstRecipe = recipes.get(0);
-            System.out.println("Fetched recipe title: " + firstRecipe.getTitle());
-            return firstRecipe.getTitle();
+    private RecipeService recipeService;
+    @GetMapping("/random")
+    public Recipe getRandomRecipe(
+            @RequestParam(required = false) String difficulty,
+            @RequestParam(required = false) String diet,
+            @RequestParam(required = false, name = "time") Integer maxTime,
+            @RequestParam(required = false, name = "type") String mealType
+    ) {
+        try {
+            return recipeService.getRandomFilteredRecipe(
+                    difficulty, diet, maxTime, mealType
+            );
+        } catch (ResponseStatusException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ResponseStatusException(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Failed to fetch recipe", ex
+            );
         }
-        return "No recipes found.";
     }
 }
