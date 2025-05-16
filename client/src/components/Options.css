@@ -1,0 +1,67 @@
+.options-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto 2rem;
+    padding: 1rem 2rem;
+
+    background-image: linear-gradient(to right, var(--color-mid), var(--color-brown));
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.options {
+    display: flex;
+    gap: 1rem;
+}
+
+.select-field {
+    font-family: "Roboto Mono", monospace;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    background-color: var(--color-white);
+    color: var(--color-dark);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.fetch-button {
+    font-family: "Roboto Mono", monospace;
+    font-size: 1rem;
+    margin-top: 0px;
+    padding: 0.6rem 1.5rem;
+    background-color: var(--color-dark);
+    color: var(--color-light);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+
+    align-self: center;
+}
+
+.fetch-button:hover {
+    background-color: var(--color-white);
+    color: var(--color-dark);
+}
+
+@media (max-width: 700px) {
+    .options-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+
+    .options {
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .fetch-button {
+        align-self: center;
+    }
+}

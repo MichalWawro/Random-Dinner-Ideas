@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import './RecipeDetails.css'
 
-function RecipeDetails({ name, description, ingredients, instructions, link, onRandomize }) {
+function RecipeDetails({ name, description, ingredients, instructions, link, onFetch }) {
     const parsedIngredients = useMemo(() => {
         try {
             return JSON.parse(ingredients);
@@ -48,11 +48,17 @@ function RecipeDetails({ name, description, ingredients, instructions, link, onR
                 </a>
             </div>
 
-            <button onClick={onRandomize}>Randomize another</button>
+            <button
+                className="fetch-button"
+                onClick={() => {
+                    onFetch()
+                    window.scrollTo(0, 0);
+                }}>
+
+                Get Random Recipe
+            </button>
         </div>
     )
 }
 
 export default RecipeDetails;
-
-//<div className='recipe-description'>{JSON.parse(recipeDetails.ingredients)}</div>

@@ -1,28 +1,39 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 function useRandomRecipe() {
     const [recipe, setRecipe] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        fetchRecipe();
-    }, []);
-
-    const fetchRecipe = async () => {
+    const fetchRecipe = useCallback(async (filters = {}) => {
         setLoading(true);
         setError(null);
+
         try {
-            const response = await fetch('http://localhost:8080/api/get-random-dish');
+            const params = new URLSearchParams();
+            Object.entries(filters).forEach(([k, v]) => {
+                if (v) params.append(k, v);
+            });
+
+            const url = params.toString()
+                ? `http://localhost:8080/api/recipes/random?${params}`
+                : 'http://localhost:8080/api/recipes/random';
+
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(response.statusText);
+
             const data = await response.json();
-            console.log(data);
             setRecipe(data);
+            console.log(data);
         } catch (err) {
             setError(err.message);
         } finally {
+
             setLoading(false);
         }
-    };
+    }, []);
+
+    useEffect(() => { fetchRecipe(); }, [fetchRecipe]);
 
     return { recipe, loading, error, fetchRecipe };
 }

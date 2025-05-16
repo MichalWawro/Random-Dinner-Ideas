@@ -3,14 +3,14 @@ import './RecipeCard.css'
 import RecipeSummary from './RecipeSummary';
 import RecipeDetails from './RecipeDetails';
 
-function RecipeCard({ recipe, onRandomize }) {
+function RecipeCard({ recipe, onFetch }) {
     if (!recipe) return <p>Loading…</p>;
 
     return (
         <div className='recipe-container'>
             <div>
                 <RecipeSummary
-                    img={"https://leitesculinaria.com/wp-content/uploads/2024/04/spaghetti-carbonara-1200.jpg"}
+                    img={recipe.imageUrl}
                     type={recipe.dishType}
                     difficulty={recipe.dishDifficulty}
                     prepTime={recipe.cookingTime}
@@ -20,8 +20,8 @@ function RecipeCard({ recipe, onRandomize }) {
                     description={recipe.quickDescription}
                     ingredients={recipe.ingredients}
                     instructions={recipe.instructions}
-                    link={"https://github.com/MichalWawro/Random-Dinner-Ideas"}
-                    onRandomize={onRandomize}
+                    link={recipe.link}
+                    onFetch={onFetch}
                 />
             </div>
         </div>

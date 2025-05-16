@@ -13,7 +13,12 @@ function RecipeSummary({ img, type, difficulty, prepTime }) {
     return (
         <div className='recipe-summary'>
             <div className='recipe-image-container'>
-                <img className="recipe-image" src={img} alt="Dish" loading="lazy" />
+                <img
+                    className="recipe-image"
+                    src={img}
+                    alt="Dish"
+                    loading="lazy"
+                />
             </div>
             <div className='recipe-meta-container'>
                 <div className="icon-wrapper">

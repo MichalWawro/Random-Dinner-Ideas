@@ -1,25 +1,44 @@
-import React, { useEffect, useState } from 'react';
-import RecipeCard from './components/RecipeCard';
-import Options from './components/Options';
-import Footer from './components/Footer';
-import useRandomRecipe from './hooks/useRandomRecipe'
+import React, { useState } from 'react';
 import './App.css';
+
+import Options from './components/Options';
+import RecipeCard from './components/RecipeCard';
+import Footer from './components/Footer';
+import useRandomRecipe from './hooks/useRandomRecipe';
 
 function App() {
   const { recipe, loading, error, fetchRecipe } = useRandomRecipe();
 
+  const [filters, setFilters] = useState({
+    difficulty: '',
+    diet: '',
+    time: '',
+    type: ''
+  });
+
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilters((prev) => ({ ...prev, [name]: value }));
+  };
+
   return (
     <div className="App">
-      {error && <p className='error-message'>{error}</p>}
+      <Options
+        filters={filters}
+        onChange={handleFilterChange}
+        onFetch={fetchRecipe}
+      />
 
-      {recipe ? (
-        <RecipeCard recipe={recipe} onRandomize={fetchRecipe} />
-      ) : (
-        !loading && <p>No recipe loaded yet.</p>
+      {error && <p className="error-message">{error}</p>}
+
+      {!loading && !recipe && <p>No recipe loaded yet.</p>}
+
+      {recipe && (
+        <>
+          <RecipeCard recipe={recipe} onFetch={() => fetchRecipe(filters)} />
+          <Footer />
+        </>
       )}
-
-      <Options />
-      <Footer />
     </div>
   );
 }

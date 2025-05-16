@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 
 :root {
-  --color-white: #FFEAEC;
+  --color-white: #F2F3AE;
   --color-light: #D7AF70;
   --color-mid: #D2A660;
-  --color-dark: #011627;
+  --color-dark: #201A15;
   --color-brown: #493B32;
 }
 
@@ -31,6 +31,7 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 2rem;
+  padding-bottom: 0;
 }
 
 @media (max-width: 700px) {
@@ -48,8 +49,3 @@ body {
     max-width: 300px;
   }
 }
-
-/* Color
-Bright: #D7AF70, #D2A660, #CE9D50
-Dark: #02233D, #011627
-*/
