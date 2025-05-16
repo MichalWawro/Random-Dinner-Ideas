@@ -20,10 +20,9 @@ function Options({ filters, onChange, onFetch }) {
           value={filters.diet}
           onChange={onChange}>
           <option value="">Diet</option>
-          <option value="vegan">Vegan</option>
           <option value="vegetarian">Vegetarian</option>
           <option value="pescetarian">Pescetarian</option>
-          <option value="carnivore">Carnivore</option>
+          <option value="omnivore">Omnivore</option>
         </select>
       </div>
 
