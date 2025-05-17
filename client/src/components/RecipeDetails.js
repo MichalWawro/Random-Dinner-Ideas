@@ -10,33 +10,36 @@ function RecipeDetails({ name, description, ingredients, instructions, link, onF
         }
     }, [ingredients]);
 
-    const instructionSteps = useMemo(() => {
-        return instructions?.split(/[\r\n]+/).filter(step => step.trim() !== '');
+    const parsedInstructions = useMemo(() => {
+        try {
+            return JSON.parse(instructions);
+        } catch {
+            return [];
+        }
     }, [instructions]);
 
     return (
         <div className='recipe-info'>
             <h2 className="recipe-name">{name}</h2>
+            {/* <div className="recipe-details-container">
 
-            <div className="recipe-details-container">
-                <div className="recipe-description">
-                    <h3>Description</h3>
-                    <p>{description}</p>
-                </div>
-                <div className="recipe-ingredients">
-                    <h3>Ingredients</h3>
-                    <ul>
-                        {parsedIngredients.map((ing, index) => (
-                            <li key={index}>{ing}</li>
-                        ))}
-                    </ul>
-                </div>
+            </div> */}
+            <div className="recipe-description">
+                <h3>Description</h3>
+                <p>{description}</p>
             </div>
-
+            <div className="recipe-ingredients">
+                <h3>Ingredients</h3>
+                <ul>
+                    {parsedIngredients.map((ing, index) => (
+                        <li key={index}>{ing}</li>
+                    ))}
+                </ul>
+            </div>
             <div className="recipe-instructions">
                 <h3>Instructions</h3>
                 <ol>
-                    {instructionSteps.map((step, index) => (
+                    {parsedInstructions.map((step, index) => (
                         <li key={index}>{step}</li>
                     ))}
                 </ol>

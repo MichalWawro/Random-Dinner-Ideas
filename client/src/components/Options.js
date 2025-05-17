@@ -50,7 +50,6 @@ function Options({ filters, onChange, onFetch }) {
           <option value="">Type</option>
           <option value="breakfast">Breakfast</option>
           <option value="dinner">Dinner</option>
-          <option value="supper">Supper</option>
         </select>
       </div>
     </div>

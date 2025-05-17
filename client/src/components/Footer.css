@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: space-around;
 
-  margin-top: 10rem;
+  margin-top: 5rem;
   padding-inline: 2rem;
 
   background-image: linear-gradient(to right, var(--color-mid), var(--color-brown));
