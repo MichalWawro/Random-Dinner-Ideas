@@ -1,6 +1,6 @@
-# Dinner Ideas Randomizer
+# Random Recipe Generator
 
-A simple Dinner Ideas Randomizer web application built with React.js on frontend, Java & Spring Boot on backend, and a database in PostgreSQL. The app gets a random recipe from the database based on selected filters and displays it on the page.
+A simple web application built with React.js on frontend, Java & Spring Boot on backend, and a database in PostgreSQL. The app gets a random recipe from the database based on selected filters and displays it on the page.
 
 ## Features:
 
